@@ -229,6 +229,230 @@ Looking forward to your response! 💖""", ""),
 
 
 # =============================================================
+# 3.0 影片反饋話術（依評級情境）
+# 結構：{情境標籤: {"note":..., "scripts":[(子標題, 內文)], "samples":[...]}}
+# =============================================================
+GUANG_FEEDBACK = {
+    "S — 優秀，完全符合": {
+        "note": "動作：誇達人 + 要廣告碼 + 要聯繫方式。逐條評級後，在 Shop Chat 發送反饋 + 視頻示例。",
+        "scripts": [
+            ("沒出單（no sales yet）", """Hey Beautiful! Just saw your video, and wow, I'm absolutely in love with it! 😍 You seriously nailed the look! If you're open to it, could you share your preferred way of contact for long-term collab? 💖
+
+By the way, if you post a few more videos, it really helps boost visibility and sales — the more content, the more exposure ✨
+
+Also, could you send over your ad code when you get a chance? So we can promote your video."""),
+            ("新視頻要 code（短版）", """Hey sweetie, INLOVE with your new video! Could you send me the ad code for it? 💗
+（視頻連結）"""),
+        ],
+        "samples": ["絕好 S（僅供參考）：https://www.tiktok.com/@_savannahlee/video/7516642180362947871"],
+    },
+    "AK / AS / C — 優良，差一點到 S": {
+        "note": "AK＝有口播的准 S；AS＝沒口播的准 S 或准 C（注意區分 C 和 AS）。發對應話術並要 Ad Code。沒有對應 Scenario 可歸類、單純觀感差時，用下方話術。",
+        "scripts": [
+            ("AK", """Hi babe 🥹💖 I just watched your video and it's sooo beautiful. If you are open to posting more, that would be amazing!
+
+Also, when you get a chance, could you please share the ad code with me? That way I can boost it with a budget to help your video reach even more people"""),
+            ("AS / C", """Hey love! I just watched your video and I'm obsessed! 😍 You did such an amazing job, seriously! 😭✨
+
+If you're open to it, would you be down to post another video that feels a bit more like a personal review? Maybe sharing how the nails feel, what stood out to you, or why you'd recommend them — I'd be so excited to promote that one too! 💖
+
+Also, could you send over your ad code when you get a chance? So we can promote your video."""),
+        ],
+        "samples": [
+            "AK（多為觀感差的口播視頻）：https://www.tiktok.com/@redheadgirl01_/video/7542292427055418637",
+            "AS（多為佩戴視頻）：https://www.tiktok.com/@strwbrryww/video/7541056938725969182",
+        ],
+    },
+    "BK1 — 有口播，太長 >60s": {
+        "note": "",
+        "scripts": [("", """Hey babe! 💖 I just watched your video, and wow, it's absolutely stunning! 😍 I'm so impressed with how much effort you put into it!
+
+One tiny tweak that could make it even more impactful is shortening it a little for ads. Reviews around 40 seconds tend to perform the best.
+
+Would you be open to creating a shorter version? I'd be so excited to promote it and help it shine even brighter! ✨💕""")],
+        "samples": ["多為視頻太長且拖沓：https://www.tiktok.com/@neida_velasquez/video/7496697819122765087"],
+    },
+    "BK2 — 有口播，產品拍攝不清晰": {
+        "note": "光線暗 / close-up 沒聚焦 / 產品細節少。",
+        "scripts": [("", """Hey love! I just watched your video, and OMG, I'm obsessed! 😍 You absolutely nailed it! 😭✨ It's nearly perfect!
+
+I just have a small suggestion. Maybe include more close-ups of the nails and using brighter lighting can really showcase the details.
+
+Would you be open to filming another version? I'd love to promote that one too!""")],
+        "samples": [
+            "https://www.tiktok.com/@urfavbpdlibra/video/7539363368088440095",
+            "https://www.tiktok.com/@queenzeyrle/video/7545247441872866573",
+        ],
+    },
+    "BK3 — 有口播，太短 <20s": {
+        "note": "有口播但太倉促、賣點不夠。",
+        "scripts": [("", """Hey love! I just watched your video, and oh my gosh, it's absolutely stunning!😍
+
+The only thing is, if the video were a little longer, around 30-60 seconds, it could work even better for ads.
+
+Would you be open to creating another video? I'd love to promote it. I just know it's going to shine even brighter!✨""")],
+        "samples": ["https://www.tiktok.com/@_..ornelas.._/video/7538128187088293134"],
+    },
+    "BK4 — 有口播，沒上手": {
+        "note": "多為沒上手、觀感不美的視頻。",
+        "scripts": [("", """Hi love! Your video is awesome — we really appreciate the voiceover! 💖
+
+If you have time, would you be open to filming another video wearing the nails? We'd love to showcase the full effect!""")],
+        "samples": ["https://www.tiktok.com/@sheinahdiah/video/7545955089463119135"],
+    },
+    "Haul — 混合多產品開箱": {
+        "note": "",
+        "scripts": [("", """Hey love! 💖 I just saw your video, and I'm obsessed witch your style! ✨
+
+Would you be open to filming a video that highlights just our nails?
+
+I totally get that you have multiple promos, but a dedicated video would mean so much to us! I really appreciate it! ❤️""")],
+        "samples": ["https://www.tiktok.com/@kaysk4ta/video/7545149495529524494"],
+    },
+    "BS1 — 無口播，沒上手": {
+        "note": "",
+        "scripts": [("", """Hi love! Your video is absolutely gorgeous — thank you so much for putting it together 💖
+If you have a little extra time, would you be open to filming another one actually wearing the nails on your hands? It would be amazing to show how they look when worn, how they feel, and maybe even share what stood out to you or why you'd recommend them 💅✨
+
+I'd be so excited to promote that version too! 💖 Can't wait to hear what you think!""")],
+        "samples": ["https://www.tiktok.com/@avery.dryman/video/7545949400527359246"],
+    },
+    "BS2 — 無口播，沒賣點": {
+        "note": "一般視頻時長短。",
+        "scripts": [("", """Hey love! I just watched your video and I'm obsessed! 😍 You did such an amazing job, seriously!
+
+If you're open to it, would you be open to posting another video that feels a bit more like a personal review? Maybe sharing how the nails feel, what stood out to you, or why you'd recommend them.
+
+I'd be so excited to promote that one too! 💖 Let me know what you think!""")],
+        "samples": ["https://www.tiktok.com/@msfazo/video/7545528516960357663"],
+    },
+    "D — 刪視頻 / 還沒發片": {
+        "note": "讓達人重發。",
+        "scripts": [("", """Hey love! I was looking for your videos, but could not find any on your page. Could you please post a video? Each set takes 2 hours to make and costs a lot to ship. I really need your help in promoting them. Can you help me out? 🥺🫶Thank youuu!💖""")],
+        "samples": [],
+    },
+    "T — 特殊：鏈接 / 指甲對不上": {
+        "note": "",
+        "scripts": [
+            ("我們的指甲、別人的鏈接", """Hi love! 💖 Thank you so much for sharing the video, it looks amazing! We just noticed the product link goes to another nail brand, so we wanted to kindly check in and see if that was a mix-up. Totally understand if it was unintentional. I just wanted to make sure your audience could find the right nails! 💅✨ Let us know if you need the correct link!"""),
+            ("別人的指甲、我們的鏈接（若已發過 3.0 就不用發這段）", """Hi love! 💖 Thank you so much for sharing your video, it looks great! We just noticed that the video features another brand's nails, but it's linked to us. Just wanted to kindly check in, in case there was a mix-up! 💅
+
+Totally understand if it was unintentional, these things happen! If you're open to it, would you be willing to film another video showcasing our set? We'd absolutely love to see you wear and highlight our design, and we're happy to resend any info you need. Let us know how we can help! ✨"""),
+        ],
+        "samples": [],
+    },
+}
+
+# B 類（BK/BS/Haul）追碼話術
+GUANG_B_ADCODE_PENDING = """Also, can I have your ad code so i can promote your videos through Spark ads? thanks!!!
+
+when you generate the ad code, could you please set the ad code's lifespan to the 365 days? this will help us drive more traffic to your videos! ❤️"""
+
+GUANG_B_ADCODE_DONE = """I'll pass your ad code to my colleague and include your video in our advertising plan 🫶"""
+
+
+SHEN_FEEDBACK = {
+    "要碼（主旨：Quick Request 💗 May I Have Your Ad Code?）": {
+        "note": "",
+        "scripts": [("", """Hi babe 🥹💖 I just watched your video and it's sooo beautiful. If you are open to posting more, that would be amazing!
+
+Also, when you get a chance, could you please share the ad code with me? That way I can boost it with a budget to help your video reach even more people""")],
+        "samples": [],
+    },
+    "S（主旨：Quick idea to boost your NailVesta video 💖）": {
+        "note": "",
+        "scripts": [("", """Hey beautiful! 💖 I just saw your video and I'm honestly in love 😍 you absolutely nailed the look!
+
+Also, posting a few more videos really helps boost visibility and sales, your content has so much potential 💕
+
+And when you get a chance, could you send over your ad code? I'd love to support your video with ads 💖""")],
+        "samples": [],
+    },
+    "AK": {
+        "note": "",
+        "scripts": [("", """Hi babe 🥹💖 I just watched your video and it's sooo beautiful — you did such an amazing job!
+
+If you're open to posting more, that would be incredible, I'd love to see more of your content ✨
+
+Also, when you get a chance, could you share your ad code with me? I'd love to support it with budget and help your video reach even more people 💕""")],
+        "samples": [],
+    },
+    "AS / C": {
+        "note": "",
+        "scripts": [("", """Hey love! I just watched your video and I'm obsessed! 😍 You did such an amazing job, seriously! 😭✨
+
+If you're open to it, would you be down to post another video that feels a bit more like a personal review? Maybe sharing how the nails feel, what stood out to you, or why you'd recommend them — I'd be so excited to promote that one too! 💖
+
+Also, could you send over your ad code when you get a chance? So we can promote your video.""")],
+        "samples": [],
+    },
+    "BK1": {
+        "note": "",
+        "scripts": [("", """Hey babe! 💖 I just watched your video, and wow, it's absolutely stunning! 😍 I'm so impressed with how much effort you put into it!
+
+One tiny tweak that could make it even more impactful is shortening it a little for ads. Reviews around 40 seconds tend to perform the best.
+
+Would you be open to creating a shorter version? I'd be so excited to promote it and help it shine even brighter! ✨💕""")],
+        "samples": [],
+    },
+    "BK2": {
+        "note": "",
+        "scripts": [("", """Hey love! 💖 I just watched your video and I'm obsessed 😍 you absolutely nailed it — it's sooo close to perfect!
+
+Just a small suggestion — adding a few more close-ups of the nails and using slightly brighter lighting could really make the details pop even more ✨
+
+Would you be open to filming another version? I'd LOVE to promote that one too 💕""")],
+        "samples": [],
+    },
+    "BK3": {
+        "note": "",
+        "scripts": [("", """Hey love! 💖 I just watched your video and it's absolutely stunning 😍 you did such an amazing job!
+
+I feel like if it were just a little longer — around 30–60 seconds — it could perform even better for ads ✨
+
+Would you be open to creating another version? I'd LOVE to promote it and help it reach even more people 💕""")],
+        "samples": [],
+    },
+    "BK4": {
+        "note": "",
+        "scripts": [("", """Hey love! 💖 I just watched your video and it looks amazing — we really appreciate the voiceover, you did such a great job 😍
+
+If you have time, would you be open to filming another version actually wearing the nails?
+
+I think showing the full look on your hands would make it even more impactful, and I'd LOVE to promote that one too ✨""")],
+        "samples": [],
+    },
+    "Haul": {
+        "note": "",
+        "scripts": [("", """Hey love! 💖 I just saw your video and I'm obsessed with your style 😍
+
+Would you be open to filming a version that highlights just our nails? I think a dedicated video would really let the details shine ✨
+
+Totally understand you have multiple promos — we really appreciate it, and it would mean so much to us 💕""")],
+        "samples": [],
+    },
+    "BS1": {
+        "note": "",
+        "scripts": [("", """Hi love! 💖 I just watched your video and it's absolutely gorgeous — thank you so much for putting it together 😍
+
+If you have a little extra time, would you be open to filming another version actually wearing the nails on your hands? I think showing how they look when worn, how they feel, and what stood out to you would make it even more impactful ✨
+
+I'd LOVE to promote that version too 💕 can't wait to hear what you think!""")],
+        "samples": [],
+    },
+    "BS2": {
+        "note": "",
+        "scripts": [("", """Hey love! 💖 I just watched your video and I'm obsessed 😍 you did such an amazing job!
+
+If you're open to it, would you be down to post another version that feels more like a personal review? Maybe sharing how the nails feel, what stood out to you, or why you'd recommend them ✨
+
+I'd LOVE to promote that one too 💕 let me know what you think!""")],
+        "samples": [],
+    },
+}
+
+
+# =============================================================
 # 各章節
 # =============================================================
 FU_STEPS = [
@@ -259,6 +483,25 @@ def build_fu_timeline():
         "<div class='fu-wrap'><div class='fu-timeline'>"
         "<div class='fu-track'></div>" + "".join(cols) + "</div></div>"
     )
+
+
+def render_feedback_section(feedback, key_prefix):
+    """3.0 影片反饋：選評級 → 顯示對應話術 + 參考影片。"""
+    choice = st.selectbox(
+        "選擇評級／情境，看對應反饋話術",
+        list(feedback.keys()),
+        key=f"{key_prefix}_fb",
+    )
+    item = feedback[choice]
+    if item.get("note"):
+        st.markdown(f"<div class='ok'>{item['note']}</div>", unsafe_allow_html=True)
+    for sub, text in item["scripts"]:
+        if sub:
+            st.markdown(f"**{sub}**")
+        st.code(text, language=None)
+    if item.get("samples"):
+        st.markdown("**參考影片**")
+        st.markdown("\n".join(f"- {s}" for s in item["samples"]))
 
 
 def render_intro():
@@ -430,12 +673,28 @@ def render_guang():
         st.caption("奇數階段在上、偶數階段在下；畫面較窄時可左右滑動。")
 
         st.subheader("Follow Up 話術（複製即用）")
-        st.caption("廣達以私訊發送。3.0 是發片後的影片反饋，依評級給對應回饋，無固定模板。")
+        st.caption("廣達以私訊發送。下方 1.0／2.0／4.0／5.0／6.0 為各階段話術；3.0（影片反饋）依評級選用，見下方。")
         for stage, _subj, body, note in GUANG_FU:
             st.markdown(f"**Follow Up {stage}**")
             st.code(body, language=None)
             if note:
                 st.caption(note)
+
+        st.markdown("---")
+        st.subheader("Follow Up 3.0 — 影片反饋話術（依評級）")
+        st.caption("逐條評級後，到 Shop Chat 發送反饋 + 視頻示例。")
+        with st.expander("📎 B 類（BK / BS / Haul）共通規則 & 追碼話術"):
+            st.markdown(
+                "- 符合**深度合作標準**的 B 類達人，也要正常發反饋\n"
+                "- 符合**廣告標準**的 B 類達人，發完 B 類話術後，加一句追碼話術 + 要聯繫方式\n"
+                "- **普通** B 類達人，不主動要廣告碼\n"
+                "- BK 評級／回覆**優先級為倒序**：BK4 > BK3 > BK2 > BK1"
+            )
+            st.markdown("**還沒發廣告碼**（先發「Ad Code 找碼圖解」，再附這段）：")
+            st.code(GUANG_B_ADCODE_PENDING, language=None)
+            st.markdown("**已發廣告碼**：")
+            st.code(GUANG_B_ADCODE_DONE, language=None)
+        render_feedback_section(GUANG_FEEDBACK, "guang")
 
     # ---- 週報製作 ----
     with tab4:
@@ -658,14 +917,17 @@ def render_shen():
 
     with tab6:
         st.caption(
-            "深達的 Follow Up 多以 Email 發送，每段含主旨。"
-            "深達沒有 2.0；3.0 為發片後的影片反饋，無固定模板。"
+            "深達的 Follow Up 多以 Email 發送，每段含主旨。深達沒有 2.0。"
         )
         for stage, subj, body, note in SHEN_FU:
             st.markdown(f"**Follow Up {stage}**　·　主旨：{subj}")
             st.code(body, language=None)
             if note:
                 st.caption(note)
+
+        st.markdown("---")
+        st.subheader("Follow Up 3.0 — 影片反饋話術（依評級）")
+        render_feedback_section(SHEN_FEEDBACK, "shen")
 
 
 def render_grading():
