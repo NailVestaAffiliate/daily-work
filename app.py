@@ -11,7 +11,16 @@ NailVesta 國內達人組 — 交接 SOP 手冊
 若要新增/修改內容，直接改下方各 render_* 函式裡的字串即可。
 """
 
+import os
+
 import streamlit as st
+
+# app.py 所在目錄，用來定位同層的圖片等資源
+ASSET_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+def asset(name):
+    return os.path.join(ASSET_DIR, name)
 
 # =============================================================
 # 頁面設定
@@ -690,7 +699,7 @@ def render_guang():
                 "- **普通** B 類達人，不主動要廣告碼\n"
                 "- BK 評級／回覆**優先級為倒序**：BK4 > BK3 > BK2 > BK1"
             )
-            st.markdown("**還沒發廣告碼**（先發「Ad Code 找碼圖解」，再附這段）：")
+            st.markdown("**還沒發廣告碼**（先發「Ad Code 找碼圖解」——圖解在「💬 話術庫」頁——再附這段）：")
             st.code(GUANG_B_ADCODE_PENDING, language=None)
             st.markdown("**已發廣告碼**：")
             st.code(GUANG_B_ADCODE_DONE, language=None)
@@ -1083,6 +1092,23 @@ def render_scripts():
         "future to include more language support! Once we have someone on the team who can support "
         "Spanish-speaking creators, we'd love to reach back out and explore a collab with you! "
         "Thank you again for understanding and for thinking of us ✨💕",
+    )
+
+    st.markdown("---")
+    st.subheader("🔎 達人問 Ad Code 哪裡找")
+    st.caption("達人問廣告碼在哪裡時，把下面這張「找碼圖解」傳給他，並附上這段話術。")
+    img_path = asset("ad_code.jpg")
+    if os.path.exists(img_path):
+        st.image(img_path, caption="How to find your ad code", use_container_width=True)
+    else:
+        st.info("把 ad_code.jpg 放到 app.py 同一層（repo 根目錄）就會顯示這張找碼圖解。")
+    script_block(
+        "話術（搭配圖片一起傳）",
+        "Hi love! 💖 Totally got you! Here's a quick step-by-step guide on how to find your ad "
+        "code 👇✨ Just follow the steps in the image and you'll have it ready in no time!\n\n"
+        "When you generate it, please set the code's lifespan to 365 days, then copy and send it "
+        "over so I can boost your video with ads to help it reach even more people 💅\n\n"
+        "Let me know if you get stuck anywhere — happy to help! 🫶",
     )
 
 
