@@ -85,6 +85,36 @@ st.sidebar.caption("有疑問先查這份手冊；查不到再問營銷部門 �
 
 
 # =============================================================
+# 深達觸達話術（再合作邀約）
+# =============================================================
+SHEN_OUTREACH_T1 = """Hi love
+It's Ava from NailVesta! I hope you've been doing amazing — I'd love to team up with you again. We just launched a bunch of new styles and I immediately thought of you
+If you're up for another collab, you can pick 2–3 of your fave styles using this link so I can send them your way:
+https://forms.gle/3jQ3ainsrEyqzXjJA
+For this collab, we'd love to keep it simple:
+• For each set you choose, please post at least 1 video per week
+• Ideally, all 2–3 sets can be filmed in face-to-camera + voiceover + hands-on (application) style
+This type of content performs really well — based on TikTok data, face-to-camera product reviews have around a 61% conversion rate
+If you follow this format, I'll be able to prioritize your videos for ad boosting on our end to help maximize your exposure and results
+Can't wait to create something cute together again!
+With love,
+Ava"""
+
+SHEN_OUTREACH_T0 = """Hi love 💖
+It's Ava from NailVesta! I hope you've been doing amazing — I'd love to team up with you again. We just launched a bunch of new styles and I immediately thought of you ✨
+If you're up for another collab, you can pick 3–4 of your fave styles using this link so I can send them your way:
+✨ https://forms.gle/ZRYf2D2KWETX3n2y7
+For this collab, we'd love to set a simple structure:
+• For each set you choose, please post at least 1 video per week
+• Ideally, all 3–4 sets can be filmed in face-to-camera + voiceover + hands-on (application) style
+This type of content performs really well — based on TikTok data, face-to-camera product reviews have around a 61% conversion rate 📈
+If you follow this format, I'll be able to prioritize your videos for ad boosting on our end to help maximize your exposure and results 💅✨
+Can't wait to create something cute together again!
+With love,
+Ava"""
+
+
+# =============================================================
 # 各章節
 # =============================================================
 def render_intro():
@@ -267,7 +297,9 @@ def render_shen():
     st.title("🟪 深達組 SOP")
     st.caption("深達 = 長期、已出單、有轉化的達人。重點在「維護關係」與「找對人深化合作」。")
 
-    tab1, tab2, tab3 = st.tabs(["📆 每日工作", "🗓️ 每週工作", "📊 每月工作"])
+    tab1, tab2, tab3, tab4 = st.tabs(
+        ["📆 每日工作", "🗓️ 每週工作", "📊 每月工作", "🎯 觸達流程（廣達轉深達）"]
+    )
 
     with tab1:
         st.markdown(
@@ -318,6 +350,43 @@ def render_shen():
             unsafe_allow_html=True,
         )
         st.caption("月報可沿用週報的篩選邏輯，拉整月區間彙總。")
+
+    with tab4:
+        st.subheader("什麼是觸達")
+        st.markdown(
+            "把表現好的廣達轉成深達（**深達二次合作**）。"
+            "先判斷達人分層，再發對應話術，最後更新兩張表的狀態。"
+        )
+
+        st.subheader("① 分層判斷（依近 28 天 affiliate orders）")
+        st.markdown(
+            "<div class='card'>"
+            "• <b>10–28 單</b>（偶爾出單）＝ <b>T2S / T1</b> → 用「<b>2–3 款</b>」話術<br>"
+            "• <b>28 單以上</b> ＝ <b>T0</b> → 用「<b>3–4 款</b>」話術<br>"
+            "<span class='muted'>判斷依據都看「近 28 天」的 affiliate orders。</span>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.subheader("② 觸達步驟")
+        st.markdown(
+            "<div class='step'>1. 找到合適的廣達，找出他的<b>聯繫方式</b></div>"
+            "<div class='step'>2. 發對應分層的<b>話術</b>給他（見下）</div>"
+            "<div class='step'>3. 在<b>廣達表</b>把該達人狀態改成「<b>深達二次合作</b>」</div>"
+            "<div class='step'>4. 在<b>深達表</b>把剛觸達的 <b>handle 填進去</b></div>"
+            "<div class='step'>5. 在深度達人 <b>status 改成「優先－已觸達」</b></div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            "<div class='ok'>完成以上 5 步，這位達人的觸達就完成了。</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.subheader("③ 觸達話術")
+        st.markdown("**T2S / T1（10–28 單，偶爾出單）— 選 2–3 款**")
+        st.code(SHEN_OUTREACH_T1, language=None)
+        st.markdown("**T0（28 單以上）— 選 3–4 款**")
+        st.code(SHEN_OUTREACH_T0, language=None)
 
 
 def render_grading():
@@ -498,9 +567,18 @@ def render_logistics():
         "<div class='card'>"
         "• 客速類型選「<b>達人補寄</b>」<br>"
         "• <b>Handle 與 Order ID 必須優先填寫</b><br>"
-        "• 發貨備註需包含<b>完整姓名和地址</b><br>"
-        "• Product Name 填款式；無特別說明則填<b>原款式</b>"
+        "• 發貨備註需包含<b>完整姓名、電話和地址</b><br>"
+        "• Product Name 填款式；<b>達人若沒特別指定，就按當初發貨的款式</b>填"
         "</div>",
+        unsafe_allow_html=True,
+    )
+    st.caption("以上為廣達水單補寄的填法。")
+
+    st.subheader("📋 跟達人要資訊")
+    st.markdown(
+        "<div class='step'>補寄前請達人提供：<b>姓名、電話、地址</b>。</div>"
+        "<div class='step'><b>地址</b>可以用 AI 工具檢查格式是否正確"
+        "（拼字、城市、州別縮寫、郵遞區號）再填單，避免寄錯。</div>",
         unsafe_allow_html=True,
     )
 
