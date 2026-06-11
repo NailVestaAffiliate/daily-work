@@ -52,6 +52,30 @@ st.markdown(
             border-radius:6px; margin:8px 0;}
       .step {background:#f8fafc; border-left:4px solid #3b82f6; padding:10px 14px;
              border-radius:6px; margin:8px 0;}
+
+      /* Follow Up 橫向時間軸 */
+      .fu-wrap{overflow-x:auto; padding:8px 0 6px;}
+      .fu-timeline{display:flex; position:relative; min-width:780px;}
+      .fu-track{position:absolute; left:1.5%; right:1.5%; top:148px;
+                height:2px; background:#dcd8cd;}
+      .fu-col{flex:1; display:flex; flex-direction:column; align-items:center;}
+      .fu-slot{height:130px; width:100%; display:flex; justify-content:center;
+               position:relative; padding:0 10px; box-sizing:border-box;}
+      .fu-slot.top{align-items:flex-end;}
+      .fu-slot.bot{align-items:flex-start;}
+      .fu-slot.top.filled::after{content:""; position:absolute; left:50%; bottom:0;
+               width:2px; height:18px; background:#dcd8cd; transform:translateX(-50%);}
+      .fu-slot.bot.filled::before{content:""; position:absolute; left:50%; top:0;
+               width:2px; height:18px; background:#dcd8cd; transform:translateX(-50%);}
+      .fu-card2{max-width:190px; text-align:center;}
+      .fu-card2 .t{font-weight:700; color:#3f3a30; font-size:0.95rem;}
+      .fu-card2 .when{display:inline-block; margin:5px 0 7px; padding:1px 10px;
+               border-radius:10px; background:#efe9dc; color:#8a7a55;
+               font-size:0.72rem; font-weight:600;}
+      .fu-card2 .d{font-size:0.78rem; color:#6b7280; line-height:1.45;}
+      .fu-dot{position:relative; z-index:1; width:38px; height:38px; border-radius:11px;
+              background:#efece4; border:1px solid #ddd8cc; color:#6b6147;
+              display:flex; align-items:center; justify-content:center; font-weight:700;}
     </style>
     """,
     unsafe_allow_html=True,
@@ -117,6 +141,36 @@ Ava"""
 # =============================================================
 # 各章節
 # =============================================================
+FU_STEPS = [
+    ("Follow Up 1.0", "當天", "樣品寄出當日：歡迎加入、說明品牌理念，預告 5 個工作天內送達"),
+    ("Follow Up 2.0", "發貨後兩天", "包裹即將送達：提醒查看拍攝指南，說明廣告預算支援（$20k+）"),
+    ("Follow Up 3.0", "發布視頻完成", "評級視頻並回反饋給達人，請他做修改及更正"),
+    ("Follow Up 4.0", "未發片過 2 週", "溫和催促：詢問進度、表達期待、提供協助"),
+    ("Follow Up 5.0", "未發片過 3 週", "跟進催促：詢問是否需要幫忙，或有什麼個人因素"),
+    ("Follow Up 6.0", "未發片過 4 週", "最後提醒：強調手工製作的用心，請求時間表或狀態更新"),
+]
+
+
+def build_fu_timeline():
+    cols = []
+    for idx, (title, when, desc) in enumerate(FU_STEPS, start=1):
+        card = (
+            f"<div class='fu-card2'><div class='t'>{title}</div>"
+            f"<div class='when'>{when}</div><div class='d'>{desc}</div></div>"
+        )
+        if idx % 2 == 1:  # 奇數放上方
+            top = f"<div class='fu-slot top filled'>{card}</div>"
+            bot = "<div class='fu-slot bot'></div>"
+        else:              # 偶數放下方
+            top = "<div class='fu-slot top'></div>"
+            bot = f"<div class='fu-slot bot filled'>{card}</div>"
+        cols.append(f"<div class='fu-col'>{top}<div class='fu-dot'>{idx}</div>{bot}</div>")
+    return (
+        "<div class='fu-wrap'><div class='fu-timeline'>"
+        "<div class='fu-track'></div>" + "".join(cols) + "</div></div>"
+    )
+
+
 def render_intro():
     st.title("🏠 交接須知")
     st.markdown(
@@ -282,18 +336,8 @@ def render_guang():
         )
 
         st.subheader("Follow Up 時間軸")
-        st.markdown(
-            """
-| 階段 | 時機 | 要做的事 |
-|---|---|---|
-| **Follow Up 1.0** | 樣品寄出當日 | 歡迎加入、說明品牌理念、預告 5 個工作天內送達 |
-| **Follow Up 2.0** | 發貨後兩天 | 提醒包裹即將送達、查看拍攝指南、說明廣告預算支援（$20k+） |
-| **Follow Up 3.0** | 發布視頻完成 | 評級視頻並回反饋，請達人做修改／更正 |
-| **Follow Up 4.0** | 未發片已過 2 週 | 溫和催促、詢問進度、表達期待、提供協助 |
-| **Follow Up 5.0** | 未發片已過 3 週 | 跟進催促、詢問是否需要任何幫忙或有個人因素 |
-| **Follow Up 6.0** | 未發片已過 4 週 | 最後提醒，強調手工製作的用心，請求時間表／狀態更新 |
-"""
-        )
+        st.markdown(build_fu_timeline(), unsafe_allow_html=True)
+        st.caption("奇數階段在上、偶數階段在下；畫面較窄時可左右滑動。")
 
     # ---- 週報製作 ----
     with tab4:
