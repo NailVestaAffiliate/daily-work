@@ -190,7 +190,10 @@ def render_schedule():
 
 def render_guang():
     st.title("🟦 廣達組 SOP")
-    tab1, tab2, tab3 = st.tabs(["☀️ 上午：批達人", "🌙 下午：評級與反饋", "🤝 達人邀約 & Follow Up"])
+    tab1, tab2, tab3, tab4 = st.tabs(
+        ["☀️ 上午：批達人", "🌙 下午：評級與反饋",
+         "🤝 達人邀約 & Follow Up", "📊 週報製作"]
+    )
 
     # ---- 上午：批達人 ----
     with tab1:
@@ -290,6 +293,69 @@ def render_guang():
 | **Follow Up 5.0** | 未發片已過 3 週 | 跟進催促、詢問是否需要任何幫忙或有個人因素 |
 | **Follow Up 6.0** | 未發片已過 4 週 | 最後提醒，強調手工製作的用心，請求時間表／狀態更新 |
 """
+        )
+
+    # ---- 週報製作 ----
+    with tab4:
+        st.subheader("週報範圍")
+        st.markdown(
+            "統計區間：**上週五 → 這週四**。資料**每週五截圖**整理。"
+        )
+
+        st.markdown("**一、數據來源**")
+        st.markdown(
+            "<div class='step'>• <b>Affiliate Center > Analytics > Creator</b>："
+            "拉 <b>7 天</b>，每週五截圖</div>"
+            "<div class='step'>• <b>窗口期出單視頻數量</b>："
+            "Analytics > All videos > <b>Video post date</b> 拉 7 天</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**二、需要詢問皮總的項目**")
+        st.markdown(
+            "<div class='warn'>以下兩項要<b>問皮總</b>取得：<br>"
+            "• <b>approve 數量</b>（上週五到這週四）<br>"
+            "• <b>影片日均</b></div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**三、數據項目**")
+        st.markdown(
+            """
+| 項目 | 怎麼算 / 在哪看 |
+|---|---|
+| **出單數量** | item sold（最上面有個總數） |
+| **出單達人數** | 點到 0 為止，往前數看出幾單 |
+| **達人 ROI** | 出單數量 ÷ approve 達人數 × 100% |
+| **出單達人佔比** | 出單達人數 ÷ approve 達人數 × 100% |
+"""
+        )
+        st.markdown(
+            "<div class='step'><b>好影片數量</b>：在廣告表篩<br>"
+            "・「發布日期 <b>晚於 -1</b>」<br>"
+            "・「發布日期 <b>早於 +1</b>」<br>"
+            "→ 兩者加起來的總數</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**四、頭部達人數據**")
+        st.markdown(
+            "<div class='step'>• <b>影片數量</b>：view details →（取<b>前 10 名</b>）</div>"
+            "<div class='step'>• <b>出單影片數量</b>：看 affiliate items sold <b>數字不為 0</b>，"
+            "看有幾條影片</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**五、頭部影片分析**")
+        st.markdown(
+            "<div class='step'>進 <b>Seller Center</b> → 按 <b>GMV 排序</b>（放<b>前 10 名</b>）</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("**六、CTR metrics**")
+        st.markdown(
+            "<div class='step'>記得<b>打勾 CTR</b></div>",
+            unsafe_allow_html=True,
         )
 
 
@@ -671,8 +737,8 @@ def render_links():
 
     st.subheader("📨 寄送 Invite 流程（Creator Center）")
     st.markdown(
-        "<div class='step'>進入 <b>Find Creator</b> → 貼上 handle → 往下找到 <b>Invite</b> → "
-        "點擊最上方連結 → 發送 Invite</div>",
+        "<div class='step'>進入 <b>Affiliate Center</b> 介面 → 找到 <b>Find Creator</b> → "
+        "貼上 handle → 往下拉找到 <b>Invite</b> → 點<b>最上面的連結</b> → 發送 Invite</div>",
         unsafe_allow_html=True,
     )
 
