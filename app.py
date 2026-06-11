@@ -297,8 +297,9 @@ def render_shen():
     st.title("🟪 深達組 SOP")
     st.caption("深達 = 長期、已出單、有轉化的達人。重點在「維護關係」與「找對人深化合作」。")
 
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["📆 每日工作", "🗓️ 每週工作", "📊 每月工作", "🎯 觸達流程（廣達轉深達）"]
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+        ["📆 每日工作", "🗓️ 每週工作", "📊 每月工作",
+         "🎯 觸達流程（廣達轉深達）", "📝 表單回覆 → 下單"]
     )
 
     with tab1:
@@ -383,10 +384,69 @@ def render_shen():
         )
 
         st.subheader("③ 觸達話術")
+        st.markdown(
+            "<div class='card'>每段話術內含對應的 Google 表單連結，達人點進去選款式：<br>"
+            "• <b>T2S / T1</b> → 表單「<b>NailVesta New Drop</b>」（只能選 <b>2–3 款</b>）<br>"
+            "• <b>T0</b> → 表單「<b>Nails selection</b>」（選 <b>3–4 款</b>）<br>"
+            "<span class='muted'>達人填完表單後，接「📝 表單回覆 → 下單」分頁的流程。</span></div>",
+            unsafe_allow_html=True,
+        )
         st.markdown("**T2S / T1（10–28 單，偶爾出單）— 選 2–3 款**")
         st.code(SHEN_OUTREACH_T1, language=None)
         st.markdown("**T0（28 單以上）— 選 3–4 款**")
         st.code(SHEN_OUTREACH_T0, language=None)
+
+    with tab5:
+        st.subheader("流程總覽")
+        st.markdown(
+            "達人填完 Google 表單後，回覆會自動進到 Google Sheet。"
+            "這頁是「把回覆變成實際出貨」的流程：**進 Sheet → 對庫存 → 填深達表 → 開水單**。"
+        )
+
+        st.subheader("兩張表單")
+        st.markdown(
+            "<div class='card'>"
+            "• <b>NailVesta New Drop</b>：只能選 2–3 款 → 給 <b>T2S / T1</b> 填<br>"
+            "• <b>Nails selection</b>：選 3–4 款 → 給 <b>T0</b> 填<br>"
+            "<span class='muted'>兩張表單的回覆都會進到 Google Sheet 的 Form_Responses 分頁。</span>"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.subheader("Sheet 欄位（達人填的資訊）")
+        st.markdown(
+            "Timestamp ｜ TikTok handle ｜ Full Name ｜ Full shipping address（含 city）｜ "
+            "Nail size ｜ Fave 2–3 styles ｜ Best contact info（email / phone）｜ "
+            "Questions and comments ｜ Score"
+        )
+
+        st.subheader("下單步驟")
+        st.markdown(
+            "<div class='step'>1. 打開 Google Sheet 的 <b>Form_Responses</b>，看達人填的資訊</div>"
+            "<div class='step'>2. <b>逐一</b>把每位達人的資訊填到<b>深達表</b>裡</div>"
+            "<div class='step'>3. <b>款式去庫存表對</b>（門檻見下方），確定有庫存才填</div>"
+            "<div class='step'>4. 填完一行後，把該行<b>後面的白色框框填滿變成黃色</b>"
+            "——這是標記「上次填到哪」，下次接著做不會重複</div>"
+            "<div class='step'>5. 複製剛填那行的<b>深達 handle</b> → 貼到<b>水單表</b>的"
+            "「<b>深度達人單</b>」分類，直接貼上</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.subheader("📦 庫存門檻")
+        st.markdown(
+            "<div class='ok'>"
+            "• <b>深達</b>：款式庫存<b>低於 5 副不批</b><br>"
+            "• <b>廣達</b>：款式庫存低於 10 副不批"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            "<div class='warn'>⚠️ <b>貼進水單前，務必再確認款式正確</b>"
+            "（款式、尺寸等）。<b>一旦入進去，庫存表就會跟著變動</b>，"
+            "改起來很麻煩，所以下單前一定要再核對一次。</div>",
+            unsafe_allow_html=True,
+        )
 
 
 def render_grading():
