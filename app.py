@@ -22,6 +22,15 @@ ASSET_DIR = os.path.dirname(os.path.abspath(__file__))
 def asset(name):
     return os.path.join(ASSET_DIR, name)
 
+
+def first_existing(*names):
+    """回傳第一個實際存在的檔案路徑（容忍底線/空格、副檔名差異）。"""
+    for n in names:
+        p = asset(n)
+        if os.path.exists(p):
+            return p
+    return None
+
 # =============================================================
 # 頁面設定
 # =============================================================
@@ -1097,8 +1106,12 @@ def render_scripts():
     st.markdown("---")
     st.subheader("🔎 達人問 Ad Code 哪裡找")
     st.caption("達人問廣告碼在哪裡時，把下面這張「找碼圖解」傳給他，並附上這段話術。")
-    img_path = asset("ad_code.jpg")
-    if os.path.exists(img_path):
+    img_path = first_existing(
+        "ad_code.jpg", "ad code.jpg",
+        "ad_code.jpeg", "ad code.jpeg",
+        "ad_code.png", "ad code.png",
+    )
+    if img_path:
         st.image(img_path, caption="How to find your ad code", use_container_width=True)
     else:
         st.info("把 ad_code.jpg 放到 app.py 同一層（repo 根目錄）就會顯示這張找碼圖解。")
