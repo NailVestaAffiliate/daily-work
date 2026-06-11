@@ -139,6 +139,96 @@ Ava"""
 
 
 # =============================================================
+# Follow Up 話術（複製即用）
+# 格式：(階段, 主旨 or None, 內文, 備註 or "")
+# =============================================================
+GUANG_FU = [
+    ("1.0", None, """Hi love!! 💖 Welcome to the NailVesta fam!
+
+Your sample is shipping today and should arrive within 5 business days
+
+Inside your package, you'll also find a little pamphlet with filming tips + a Discord QR code — feel free to scan and join our creator community 💕
+
+For best performance, we highly recommend a face-to-camera application + review video (this is the most important ✨) with:
+• clear nail close-ups (first 3 seconds)
+• bright/natural lighting
+• sharing your real thoughts
+
+Top-performing content (based on TikTok official conversion data):
+▪️Product reviews (61%)
+▪️"Worth it?" / honest opinions (44%)
+▪️Before & after results (41%)
+
+Content like this performs better and has a higher chance to be selected for paid ad boosting on our side ✨
+
+Let's make magic together 💖""", ""),
+    ("2.0", None, """Hey babe! 💕 Your NailVesta package is almost there! 📦
+
+Don't forget — there's a Discord QR code inside the package, feel free to join and connect with other creators 💖
+
+When posting, please:
+• tag @nailvesta_official
+• use #NailVesta
+• add the product link
+
+If your video includes face-to-camera + application (talking & showing on hand) + clear nail details + good lighting, we'll support it with paid ad boosting to help increase your exposure, views, followers, and conversions ✨
+
+Top-performing content (based on TikTok official conversion data):
+▪️Product reviews (61%)
+▪️"Worth it?" / honest opinions (44%)
+▪️Before & after results (41%)
+
+Can't wait to see your content — so excited for this collab 💕""", ""),
+    ("4.0", None, """Hi gorgeous! 💖 Just checking in to see how it's going with your NailVesta set! I am so excited to see your video. If you're able to post it this week, that would be amazing!
+
+No worries if you've been busy, but if you need any help or have questions, just let me know. Thanks so much for being part of this collab! 💅""", ""),
+    ("5.0", None, """Hi darling ✨ Just wanted to gently check in. So excited to see your video!
+
+Each set is handmade with love and takes a few hours to create, so it truly means a lot to me 💖
+
+If you have an idea of when you might post, would love to hear! No rush at all. Just here cheering you on. Let me know if I can help with anything!""", ""),
+    ("6.0", None, """Hi pretty 💕 Just checking in! Totally understand how busy life gets. I really appreciate your time and effort!
+
+If you're still planning to post, would you mind sharing a rough timeline? And if anything's changed, no worries at all. Just plz let me know so we can adjust 💖
+
+Here if you need anything! 😊""", ""),
+]
+
+SHEN_FU = [
+    ("1.0", "Your NailVesta package is arriving soon 💕", """Hi love 🤍
+
+Just wanted to give you a quick update — your NailVesta package has officially been shipped out and should arrive within around 3–5 business days ✨
+
+Here's your USPS tracking number so you can follow it on the way:
+
+LV067303122U
+
+I'm so excited for you to get it and can't wait to see what you create 💖
+
+And just a little reminder, once you post your video, please send me your AD CODE too 🫶✨ I'd love to prioritize boosting your video on TikTok so it can get even more reach and conversions.
+
+So excited for your content!
+
+Best,
+Ava""",
+     "粗體部分：「has officially been shipped out」「around 3–5 business days」「追蹤碼」。"
+     "追蹤碼 LV067303122U 是範例，每位達人不同，發送前記得換成實際碼。"),
+    ("4.0", "NailVesta – Posting now could bring more reach & sales 💖", """Hi love! It's Ava. Just wanted to check in real quick, Hope you're doing well 💖
+I was wondering if your package arrived safely! Also wanted to share that we've been seeing a nice boost in video reach lately, so it's a great time for content to get seen by more people
+If you're planning to post soon, your video could definitely benefit from the extra exposure. And more views often lead to more sales too 💅 Let me know if you need anything or have any questions!""", ""),
+    ("5.0", "Excited to See Your Video! ✨", """Hey love,
+Just checking in again—we're really looking forward to seeing your NailVesta video! Your creativity always shines, and we know your audience will love it too. 💕
+Just wanted to check in and see if you have an estimated post date. This will help us align our promotion schedule. If there's anything holding you back, we'd love to assist in any way we can. We appreciate your collaboration and can't wait to see your stunning content! 💅✨
+Looking forward to hearing from you soon!""", ""),
+    ("6.0", "Urgent: Final Follow-Up on Your NailVesta Video 💖", """Hey love,
+We completely understand that life gets busy, and we truly appreciate your time and creativity! However, it's now been four weeks since you received your NailVesta set, and we haven't seen your video yet.
+If you're still planning to post, please let us know your timeline ASAP, so we can schedule accordingly. If you're facing any challenges or need assistance, we're happy to help! However, if you're unable to proceed with the post, kindly let us know so we can adjust our plans accordingly.
+We value our collaboration and your creative work, and we'd love to continue working with you! Please provide an update at your earliest convenience.
+Looking forward to your response! 💖""", ""),
+]
+
+
+# =============================================================
 # 各章節
 # =============================================================
 FU_STEPS = [
@@ -339,6 +429,14 @@ def render_guang():
         st.markdown(build_fu_timeline(), unsafe_allow_html=True)
         st.caption("奇數階段在上、偶數階段在下；畫面較窄時可左右滑動。")
 
+        st.subheader("Follow Up 話術（複製即用）")
+        st.caption("廣達以私訊發送。3.0 是發片後的影片反饋，依評級給對應回饋，無固定模板。")
+        for stage, _subj, body, note in GUANG_FU:
+            st.markdown(f"**Follow Up {stage}**")
+            st.code(body, language=None)
+            if note:
+                st.caption(note)
+
     # ---- 週報製作 ----
     with tab4:
         st.subheader("週報範圍")
@@ -407,9 +505,9 @@ def render_shen():
     st.title("🟪 深達組 SOP")
     st.caption("深達 = 長期、已出單、有轉化的達人。重點在「維護關係」與「找對人深化合作」。")
 
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
         ["📆 每日工作", "🗓️ 每週工作", "📊 每月工作",
-         "🎯 觸達流程（廣達轉深達）", "📝 表單回覆 → 下單"]
+         "🎯 觸達流程（廣達轉深達）", "📝 表單回覆 → 下單", "📨 Follow Up 話術"]
     )
 
     with tab1:
@@ -557,6 +655,17 @@ def render_shen():
             "改起來很麻煩，所以下單前一定要再核對一次。</div>",
             unsafe_allow_html=True,
         )
+
+    with tab6:
+        st.caption(
+            "深達的 Follow Up 多以 Email 發送，每段含主旨。"
+            "深達沒有 2.0；3.0 為發片後的影片反饋，無固定模板。"
+        )
+        for stage, subj, body, note in SHEN_FU:
+            st.markdown(f"**Follow Up {stage}**　·　主旨：{subj}")
+            st.code(body, language=None)
+            if note:
+                st.caption(note)
 
 
 def render_grading():
