@@ -106,6 +106,16 @@ st.markdown(
       .wk-chip.sale{background:#dcfce7; color:#15803d;}
       .wk-arrow{color:#9ca3af; font-weight:700; letter-spacing:-1px;}
       .wk-counts{margin-left:auto; font-size:0.85rem; color:#374151;}
+
+      /* 月報巢狀效益關係 */
+      .nest-out{border:2px solid #cbd5e1; border-radius:12px; padding:14px;
+                background:#f8fafc;}
+      .nest-mid{border:2px solid #c4b5fd; border-radius:10px; padding:12px;
+                background:#faf5ff; margin-top:10px;}
+      .nest-in{border:2px dashed #a78bfa; border-radius:8px; padding:10px;
+               background:#f3e8ff; margin-top:10px;}
+      .nest-lab{font-weight:700; font-size:0.9rem;}
+      .nest-sub{font-size:0.78rem; color:#6b7280; display:block; margin-top:2px;}
     </style>
     """,
     unsafe_allow_html=True,
@@ -897,11 +907,47 @@ def render_shen():
         )
 
     with tab3:
+        st.markdown("### 製作深達月報並分析")
+        st.markdown("月報重點在「**算出深達帶來多少效益**」，再聚焦 Top 10 深達的貢獻。資料拉<b>整月</b>區間彙總。", unsafe_allow_html=True)
+
         st.markdown(
-            "<div class='step'><b>製作深達月報並分析</b></div>",
+            "<div class='step'><b>① 月度深達整體效益</b><br>"
+            "統計整月的 <b>GMV</b> 與 <b>Items Sold</b>——這就是<b>深達帶來的效益</b>。</div>"
+            "<div class='step'><b>② 找出 Top 10 深達</b><br>"
+            "從深達中排出當月<b>前 10 名</b>。</div>"
+            "<div class='step'><b>③ 分析 Top 10 的貢獻</b><br>"
+            "進一步算這 Top 10：<br>"
+            "・給<b>深達整體</b>帶來多少效益（占深達 GMV／Items 的比例）<br>"
+            "・給<b>店舖（整店）</b>帶來多少效益（占全店 GMV／Items 的比例）</div>",
             unsafe_allow_html=True,
         )
-        st.caption("月報可沿用週報的篩選邏輯，拉整月區間彙總。")
+
+        st.markdown("#### 效益關係（由大到小）")
+        st.markdown(
+            """
+<div class='nest-out'>
+  <span class='nest-lab'>🏬 整店</span>
+  <span class='nest-sub'>全店 GMV／Items Sold</span>
+  <div class='nest-mid'>
+    <span class='nest-lab'>🟪 深達整體</span>
+    <span class='nest-sub'>深達帶來的 GMV／Items Sold　→　算「占整店多少 %」</span>
+    <div class='nest-in'>
+      <span class='nest-lab'>⭐ Top 10 深達</span>
+      <span class='nest-sub'>算「占深達多少 %」與「占整店多少 %」</span>
+    </div>
+  </div>
+</div>
+""",
+            unsafe_allow_html=True,
+        )
+        st.caption("一句話：月報要量化『深達占整店多少』，以及『Top 10 又占深達與整店多少』。")
+
+        st.markdown(
+            "<div class='ok'>💡 <b>不用手算</b>：可以用 <b>ChatGPT 或 Claude 幫忙寫程式碼</b>來分析。"
+            "把當月深達／全店的 GMV、Items Sold 匯出檔丟給 AI，請它算出總計、排出 Top 10、"
+            "以及各項占比，省時又不容易出錯。</div>",
+            unsafe_allow_html=True,
+        )
 
     with tab4:
         st.subheader("什麼是觸達")
