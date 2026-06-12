@@ -961,7 +961,10 @@ def render_shen():
             "<div class='step'><b>⑨ Approve Shopify 達人</b><br>"
             "到 Shopify 後台審批 affiliate 達人申請。<br>"
             "<a href='https://admin.shopify.com/store/wkb1va-ze/apps/affliate-by-secomapp/admin/affiliates?page=1&page_size=10' "
-            "target='_blank'>開啟 Shopify Affiliates 後台 ↗</a></div>",
+            "target='_blank'>開啟 Shopify Affiliates 後台 ↗</a><br>"
+            "邀請達人加入官網 affiliate 的話術見「💬 話術庫」；"
+            "註冊連結：<a href='https://af.uppromote.com/nailvesta/register?p=322117' "
+            "target='_blank'>UpPromote 註冊 ↗</a></div>",
             unsafe_allow_html=True,
         )
 
@@ -1386,6 +1389,24 @@ def render_scripts():
         "When you generate it, please set the code's lifespan to 365 days, then copy and send it "
         "over so I can boost your video with ads to help it reach even more people 💅\n\n"
         "Let me know if you get stuck anywhere — happy to help! 🫶",
+    )
+
+    st.markdown("---")
+    st.subheader("🛍️ 邀請加入官網 affiliate（UpPromote）")
+    st.caption(
+        "TikTok Shop 以外的官網分潤計畫：達人用自己的專屬連結帶單到官網，成交可抽成。"
+    )
+    script_block(
+        "話術（含註冊連結）",
+        "Hi babe,\n"
+        "This is our other affiliate program! ✨\n"
+        "You can create your own personalized affiliate link and share it across your social media platforms.\n"
+        "Unlike TikTok Shop, purchases made through your affiliate link will be directed to our "
+        "website. If someone places an order through your link, you'll earn commission on those "
+        "sales. 💕\n"
+        "You can sign up here:\n"
+        "https://af.uppromote.com/nailvesta/register?p=322117\n"
+        "Let me know if you have any questions. I'd be happy to help!",
     )
 
 
