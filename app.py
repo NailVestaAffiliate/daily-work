@@ -1113,6 +1113,31 @@ def render_grading():
         unsafe_allow_html=True,
     )
 
+    st.markdown("---")
+    st.subheader("📝 影片反饋話術（依評級）")
+    st.markdown(
+        "<span class='tag tag-guang'>廣達</span> 評完級後，到 Shop Chat 發送對應反饋話術。",
+        unsafe_allow_html=True,
+    )
+    with st.expander("📎 B 類（BK / BS / Haul）共通規則 & 追碼話術"):
+        st.markdown(
+            "- 符合**深度合作標準**的 B 類達人，也要正常發反饋\n"
+            "- 符合**廣告標準**的 B 類達人，發完 B 類話術後，加一句追碼話術 + 要聯繫方式\n"
+            "- **普通** B 類達人，不主動要廣告碼\n"
+            "- BK 評級／回覆**優先級為倒序**：BK4 > BK3 > BK2 > BK1"
+        )
+        st.markdown("**還沒發廣告碼**（先發「Ad Code 找碼圖解」——圖解在「💬 話術庫」頁——再附這段）：")
+        st.code(GUANG_B_ADCODE_PENDING, language=None)
+        st.markdown("**已發廣告碼**：")
+        st.code(GUANG_B_ADCODE_DONE, language=None)
+    render_feedback_section(GUANG_FEEDBACK, "grading_guang")
+
+    st.markdown(
+        "<span class='tag tag-shen'>深達</span> 深達評完級後的反饋話術（要碼／各評級），多以 Email 發送。",
+        unsafe_allow_html=True,
+    )
+    render_feedback_section(SHEN_FEEDBACK, "grading_shen")
+
 
 def script_block(title, body, note=""):
     st.markdown(f"**{title}**")
