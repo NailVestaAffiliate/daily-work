@@ -94,6 +94,18 @@ st.markdown(
       .fu-dot{position:relative; z-index:1; width:38px; height:38px; border-radius:11px;
               background:#efece4; border:1px solid #ddd8cc; color:#6b6147;
               display:flex; align-items:center; justify-content:center; font-weight:700;}
+
+      /* 週報「週出單達人」兩欄示意 */
+      .wk-ex{margin:6px 0;}
+      .wk-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+              padding:10px 12px; border:1px solid #e5e7eb; border-radius:10px;
+              margin-bottom:8px; background:#fff;}
+      .wk-label{font-weight:700; color:#7e22ce; min-width:54px;}
+      .wk-chip{padding:2px 10px; border-radius:10px; font-size:0.8rem; font-weight:600;}
+      .wk-chip.post{background:#e0f2fe; color:#0369a1;}
+      .wk-chip.sale{background:#dcfce7; color:#15803d;}
+      .wk-arrow{color:#9ca3af; font-weight:700; letter-spacing:-1px;}
+      .wk-counts{margin-left:auto; font-size:0.85rem; color:#374151;}
     </style>
     """,
     unsafe_allow_html=True,
@@ -819,8 +831,62 @@ def render_shen():
         )
 
     with tab2:
+        st.markdown("### ① 達人週報製作")
+        st.markdown("從深達表拉篩選製作週報並分析。以下是各統計項目的口徑與操作方式。")
+
         st.markdown(
-            "<div class='step'><b>① 達人週報製作</b><br>從深達表拉篩選，製作對應週報並分析。</div>"
+            "<div class='warn'>⏱️ <b>影片類型統計一律採用「兩週前」的資料區間</b>，不是當週。</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown(
+            "<div class='step'><b>影片類型與數量</b><br>"
+            "在深達表選「<b>觸達</b>」這張表 → 開<b>篩選</b> → 統計各視頻類型及數量"
+            "（採<b>兩週前</b>區間）。</div>"
+            "<div class='step'><b>觸達族群</b><br>一樣到「<b>觸達</b>」表，用<b>篩選</b>統計。</div>"
+            "<div class='step'><b>合作達人</b><br>用篩選看共有<b>多少位達人</b>。</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("#### 週出單視頻的達人（分兩欄，務必分清楚）")
+        st.markdown(
+            "<div class='card'>"
+            "• <b>欄位 A — 週出單（不限發布週）</b>：該週<b>有出單</b>的達人，"
+            "<b>不管影片是哪一週發的</b>。<br>"
+            "• <b>欄位 B — 週出單 ＋ 當週發布</b>：該週有出單，"
+            "<b>且影片也在同一週發布</b>的達人。"
+            "</div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            """
+<div class='wk-ex'>
+  <div class='wk-row'>
+    <span class='wk-label'>達人 A</span>
+    <span class='wk-chip post'>影片發布 4/3</span>
+    <span class='wk-arrow'>──→</span>
+    <span class='wk-chip sale'>出單 5/20（報告週）</span>
+    <span class='wk-counts'>計入 <b>欄位 A</b></span>
+  </div>
+  <div class='wk-row'>
+    <span class='wk-label'>達人 B</span>
+    <span class='wk-chip post'>影片發布 5/19（報告週）</span>
+    <span class='wk-arrow'>──→</span>
+    <span class='wk-chip sale'>出單 5/20（報告週）</span>
+    <span class='wk-counts'>計入 <b>欄位 A ＋ 欄位 B</b></span>
+  </div>
+</div>
+""",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            "<div class='ok'>記法：<b>欄位 B 是欄位 A 的子集</b>——只要當週出單就進 A；"
+            "若影片又剛好在當週發，才同時進 B。達人 A 的影片是 4/3 發的，所以只進 A、不進 B。</div>",
+            unsafe_allow_html=True,
+        )
+
+        st.markdown("---")
+        st.markdown(
             "<div class='step'><b>② 優化話術</b><br>制定更好的廣達及深達話術，讓視頻效應最大化，"
             "讓發布的影片<b>S 級多一些</b>。</div>"
             "<div class='step'><b>③ 監督表現</b><br>同時監督深達與廣達的表現。</div>"
@@ -1160,6 +1226,22 @@ def render_logistics():
         "<div class='step'><b>地址</b>可以用 AI 工具檢查格式是否正確"
         "（拼字、城市、州別縮寫、郵遞區號）再填單，避免寄錯。</div>",
         unsafe_allow_html=True,
+    )
+
+    st.subheader("🧾 水單表收件資訊標準格式")
+    st.markdown(
+        "<div class='card'>每筆<b>三行</b>：<br>"
+        "1. 收件人姓名<br>"
+        "2. 電話（含國碼，格式 <code>(+1)號碼</code>）<br>"
+        "3. 完整地址：街道 + Apt / Bldg，城市，州，國家，郵遞區號</div>",
+        unsafe_allow_html=True,
+    )
+    st.markdown("**範例**")
+    st.code(
+        "Jasmin Ordonez\n"
+        "(+1)7373483260\n"
+        "1006 Home Depot Way Apt 4306 Bldg 4, Bastrop, Texas, United States 78602",
+        language=None,
     )
 
 
