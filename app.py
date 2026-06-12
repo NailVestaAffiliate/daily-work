@@ -1303,7 +1303,9 @@ def render_links():
 
     st.subheader("🗂️ 系統 / 工具清單")
     st.markdown(
-        "<div class='ok'>以下系統的實際網址<b>詳見 Canva</b>（交接文件）。</div>",
+        "<div class='ok'>以下系統的實際網址詳見 <b>Canva</b> 交接文件："
+        "<a href='https://www.canva.com/design/DAHDfOnYwRE/anQklS9Kp9Jg8NFn-dGebw/edit' "
+        "target='_blank'>開啟 Canva ↗</a></div>",
         unsafe_allow_html=True,
     )
     st.markdown(
