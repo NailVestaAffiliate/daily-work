@@ -116,6 +116,19 @@ st.markdown(
                background:#f3e8ff; margin-top:10px;}
       .nest-lab{font-weight:700; font-size:0.9rem;}
       .nest-sub{font-size:0.78rem; color:#6b7280; display:block; margin-top:2px;}
+
+      /* 達人生命週期流程 */
+      .flow{display:flex; flex-wrap:wrap; gap:8px; margin:8px 0;}
+      .flow-node{flex:0 0 auto; width:150px; background:#fff; border:1px solid #e5e7eb;
+                 border-left:4px solid #cbd5e1; border-radius:10px; padding:8px 10px;}
+      .flow-node.g{border-left-color:#38bdf8;}
+      .flow-node.s{border-left-color:#a78bfa;}
+      .flow-node.n{border-left-color:#cbd5e1;}
+      .flow-node .fn{display:inline-flex; width:20px; height:20px; border-radius:6px;
+                     background:#f1f5f9; color:#475569; font-size:0.72rem; font-weight:700;
+                     align-items:center; justify-content:center; margin-bottom:4px;}
+      .flow-node .flab{font-weight:700; font-size:0.85rem; display:block; line-height:1.3;}
+      .flow-node .fpg{font-size:0.72rem; color:#9ca3af;}
     </style>
     """,
     unsafe_allow_html=True,
@@ -129,6 +142,7 @@ st.sidebar.caption("交接 SOP 手冊 · 照著做就會")
 
 PAGES = [
     "🏠 交接須知（先看這頁）",
+    "📖 名詞速查",
     "📅 每日工作時間表",
     "🟦 廣達組 SOP",
     "🟪 深達組 SOP",
@@ -544,6 +558,73 @@ def render_feedback_section(feedback, key_prefix):
         st.markdown("\n".join(f"- {s}" for s in item["samples"]))
 
 
+# 達人生命週期：(編號, 名稱, 類別 g/s/n, 對應分頁)
+LIFECYCLE = [
+    ("1", "達人申請", "g", "廣達·上午"),
+    ("2", "批達人", "g", "廣達·上午"),
+    ("3", "寄樣 1.0／2.0", "g", "廣達·Follow Up"),
+    ("4", "達人發片", "n", ""),
+    ("5", "評級 3.0", "g", "廣達·下午"),
+    ("6", "反饋＋要碼", "n", "話術／評級制度"),
+    ("7", "廣告投放", "n", "Spark ad"),
+    ("8", "出單", "n", ""),
+    ("9", "標記可深達", "g", "PC"),
+    ("10", "觸達轉深達", "s", "深達·觸達流程"),
+    ("11", "深達維護", "s", "深達·Follow Up／月報"),
+]
+
+
+def build_lifecycle():
+    nodes = []
+    for num, label, cls, pg in LIFECYCLE:
+        pgline = f"<span class='fpg'>{pg}</span>" if pg else ""
+        nodes.append(
+            f"<div class='flow-node {cls}'><span class='fn'>{num}</span>"
+            f"<span class='flab'>{label}</span>{pgline}</div>"
+        )
+    return "<div class='flow'>" + "".join(nodes) + "</div>"
+
+
+# 名詞速查：(名詞, 說明)
+GLOSSARY = [
+    ("廣達", "廣度達人：新合作 / 尚未出單的達人，多靠平台合作、有時效性發片。"),
+    ("深達", "深度達人：長期 / 已出單 / 有轉化的達人，由公司發貨、發片無時效壓力。"),
+    ("S 級", "最高影片評級：完全符合推廣要求。動作＝誇達人＋要廣告碼＋要聯繫方式。"),
+    ("AK / AS / C", "準 S 評級。AK＝有口播沒露臉；AS＝沒口播有露臉；C＝高級美甲展示。"),
+    ("BK1–BK4", "有口播但有問題（太長 / 拍不清 / 太短 / 沒上手），回覆優先級 BK4>BK3>BK2>BK1。"),
+    ("BS1 / BS2", "無口播：BS1 沒上手、BS2 沒賣點。"),
+    ("T / Haul / D", "特殊：T＝鏈接或指甲對不上 / 西語；Haul＝混多產品；D＝刪片，要重發。"),
+    ("PC（可深達）", "達標的廣達可標記為「可深達」，後續轉入深達流程。"),
+    ("觸達", "把表現好的廣達轉成深達（深達二次合作）的動作。"),
+    ("T0 / T1 / T2S", "達人分層：T0＝28 單以上；T1＝10–28 單；T2S＝新 / 潛力達人。"),
+    ("Follow Up 1.0–6.0", "寄樣後到催發片的分階段跟進話術。"),
+    ("3.0 反饋", "影片發布後，依評級回給達人的反饋話術。"),
+    ("水單", "補寄出貨單。深達補寄分類為「深度達人單」。"),
+    ("甲冊", "寄給達人的美甲樣本冊；有甲冊發片轉化率特別好。"),
+    ("ad code / 廣告碼", "達人授權影片可被投放廣告的代碼；建議設 365 天效期。"),
+    ("Spark ad", "用達人原生影片去投放的廣告形式。"),
+    ("均播", "平均播放量。批達人參考門檻之一（500+）。"),
+    ("GMV", "商品交易總額（成交金額）。"),
+    ("AOV", "平均訂單金額（客單價）。"),
+    ("ASP", "平均售價。"),
+    ("Items Sold", "售出件數。"),
+    ("達人 ROI", "本 SOP 定義：出單數量 ÷ approve 達人數 × 100%。"),
+    ("flat fee", "付費合作（固定費用），深達月預算 2000。"),
+    ("KOL", "關鍵意見領袖（較具影響力的合作達人）。"),
+    ("Lark", "批達人、評級時的主要操作後台（含 Affiliate List / Account）。"),
+    ("curva", "廣達廣告表 approve 用的工具（深達每日工作）。"),
+    ("fastmoos", "分析達人 GMV、均播、品類的工具（深達建聯篩選用）。"),
+    ("CU / CR 消息", "每日要回覆的訊息類別；CU 回覆情境見營銷部門 → 達人部門文件。"),
+]
+
+
+def render_glossary():
+    st.title("📖 名詞速查")
+    st.caption("看其他頁遇到不懂的詞，回這頁查。定義以本 SOP 與團隊內部說法為準。")
+    rows = "\n".join(f"| **{t}** | {d} |" for t, d in GLOSSARY)
+    st.markdown("| 名詞 | 說明 |\n|---|---|\n" + rows)
+
+
 def render_intro():
     st.title("🏠 交接須知")
     st.markdown(
@@ -592,6 +673,28 @@ def render_intro():
         unsafe_allow_html=True,
     )
 
+    st.subheader("達人生命週期（先看懂全貌）")
+    st.markdown("一個達人從申請到變成長期深達，會走過這些階段。每格標了對應分頁：")
+    st.markdown(build_lifecycle(), unsafe_allow_html=True)
+    st.markdown(
+        "<span class='tag tag-guang'>廣達</span> 藍色階段　"
+        "<span class='tag tag-shen'>深達</span> 紫色階段　"
+        "<span class='muted'>灰色為共用流程</span>",
+        unsafe_allow_html=True,
+    )
+
+    st.subheader("第一週這樣上手")
+    st.markdown(
+        "<div class='step'><b>第 1–2 天</b>：讀「交接須知」「名詞速查」「達人生命週期」，"
+        "跟上一手要齊：各系統網址（Canva）、Lark／廣告表／總表權限、群組與 Discord。</div>"
+        "<div class='step'><b>第 3–4 天</b>：跟著做「廣達·上午批達人」與「廣達·下午評級 3.0」，"
+        "邊做邊查「評級制度」與話術。</div>"
+        "<div class='step'><b>第 5–7 天</b>：熟悉私訊回覆與 Follow Up，了解「深達觸達流程」與"
+        "「表單回覆→下單」，知道何時把廣達轉深達。</div>"
+        "<div class='step'><b>第二週起</b>：接手週報，月底跟著做月報（可用 AI 幫忙算）。</div>",
+        unsafe_allow_html=True,
+    )
+
 
 def render_schedule():
     st.title("📅 每日工作時間表")
@@ -613,6 +716,22 @@ def render_schedule():
         "交接時記得跟上一手確認本週輪到誰。</div>",
         unsafe_allow_html=True,
     )
+
+    st.subheader("✅ 今日工作清單")
+    st.caption("邊做邊勾。勾選只在本次瀏覽有效，重新整理會清空，每天重新勾。")
+    daily_tasks = [
+        "視頻評級 3.0 並回反饋（前一天發布的影片）",
+        "回覆 CU、CR 消息",
+        "批達人（當日申請，24 小時內完成）",
+        "達人池優化：搜尋新潛力達人、標記高品質素材",
+        "達人日報（輪值）",
+        "（週日）達人週報",
+    ]
+    done = 0
+    for i, t in enumerate(daily_tasks):
+        if st.checkbox(t, key=f"daily_{i}"):
+            done += 1
+    st.progress(done / len(daily_tasks), text=f"已完成 {done}/{len(daily_tasks)}")
 
 
 def render_guang():
@@ -735,6 +854,7 @@ def render_guang():
             st.markdown("**已發廣告碼**：")
             st.code(GUANG_B_ADCODE_DONE, language=None)
         render_feedback_section(GUANG_FEEDBACK, "guang")
+        st.caption("同一份反饋話術，也可在「⭐ 評級制度（3.0）」頁找到（標廣達）。")
 
     # ---- 週報製作 ----
     with tab4:
@@ -836,7 +956,12 @@ def render_shen():
             "<div class='step'><b>⑦ 看廣達日報</b><br>從日報分析中找出當日問題在哪、找出優化點。</div>"
 
             "<div class='step'><b>⑧ 評估寄甲冊</b><br>"
-            "看哪些深達可以寄甲冊；<b>有甲冊去發布視頻，轉化率會特別好</b>。</div>",
+            "看哪些深達可以寄甲冊；<b>有甲冊去發布視頻，轉化率會特別好</b>。</div>"
+
+            "<div class='step'><b>⑨ Approve Shopify 達人</b><br>"
+            "到 Shopify 後台審批 affiliate 達人申請。<br>"
+            "<a href='https://admin.shopify.com/store/wkb1va-ze/apps/affliate-by-secomapp/admin/affiliates?page=1&page_size=10' "
+            "target='_blank'>開啟 Shopify Affiliates 後台 ↗</a></div>",
             unsafe_allow_html=True,
         )
 
@@ -1058,6 +1183,7 @@ def render_shen():
         st.markdown("---")
         st.subheader("Follow Up 3.0 — 影片反饋話術（依評級）")
         render_feedback_section(SHEN_FEEDBACK, "shen")
+        st.caption("同一份反饋話術，也可在「⭐ 評級制度（3.0）」頁找到（標深達）。")
 
 
 def render_grading():
@@ -1137,6 +1263,7 @@ def render_grading():
         unsafe_allow_html=True,
     )
     render_feedback_section(SHEN_FEEDBACK, "grading_shen")
+    st.caption("同一份反饋話術，也可在廣達／深達各自的「Follow Up」分頁找到。")
 
 
 def script_block(title, body, note=""):
@@ -1364,13 +1491,14 @@ def render_links():
 # =============================================================
 ROUTES = {
     PAGES[0]: render_intro,
-    PAGES[1]: render_schedule,
-    PAGES[2]: render_guang,
-    PAGES[3]: render_shen,
-    PAGES[4]: render_grading,
-    PAGES[5]: render_scripts,
-    PAGES[6]: render_logistics,
-    PAGES[7]: render_links,
+    PAGES[1]: render_glossary,
+    PAGES[2]: render_schedule,
+    PAGES[3]: render_guang,
+    PAGES[4]: render_shen,
+    PAGES[5]: render_grading,
+    PAGES[6]: render_scripts,
+    PAGES[7]: render_logistics,
+    PAGES[8]: render_links,
 }
 ROUTES[page]()
 
