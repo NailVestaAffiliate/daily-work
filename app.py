@@ -1480,7 +1480,7 @@ def render_links():
 
     st.subheader("🔐 帳號 / 系統登入")
     st.markdown(
-        "<div class='warn'>為了安全，<b>密碼不寫在這裡</b>，請看 Canva 交接文件或密碼管理器。"
+        "<div class='warn'>為了安全，<b>密碼不寫在這裡，需要時問皮總</b>。"
         "（此 app 有網址即可瀏覽，且內容會留在 GitHub 紀錄。）</div>",
         unsafe_allow_html=True,
     )
@@ -1488,9 +1488,9 @@ def render_links():
         """
 | 系統 | 帳號 | 密碼 |
 |---|---|---|
-| 公司郵箱 | Ava@nailvests.com | 見 Canva |
-| ChatGPT | ava@nailvesta.com | 見 Canva |
-| Instagram | nailvesta_official | 見 Canva |
+| 公司郵箱 | Ava@nailvests.com | 問皮總 |
+| ChatGPT | ava@nailvesta.com | 問皮總 |
+| Instagram | nailvesta_official | 問皮總 |
 """
     )
     st.caption("提醒：郵箱網域是 nailvests.com、ChatGPT 是 nailvesta.com，兩者不同，請確認哪個是筆誤。")
