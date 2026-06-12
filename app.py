@@ -11,6 +11,7 @@ NailVesta 國內達人組 — 交接 SOP 手冊
 若要新增/修改內容，直接改下方各 render_* 函式裡的字串即可。
 """
 
+import hmac
 import os
 
 import streamlit as st
@@ -30,6 +31,37 @@ def first_existing(*names):
         if os.path.exists(p):
             return p
     return None
+
+
+def _has_secret(key):
+    try:
+        return key in st.secrets
+    except Exception:
+        return False
+
+
+def check_password():
+    """密碼門：對了才進。密碼存在 Streamlit 的 Secrets（password 欄），不放在程式裡。"""
+    if not _has_secret("password"):
+        # 尚未設定密碼 → 放行並提醒怎麼啟用，避免把自己鎖在外面
+        st.info(
+            "🔓 目前未啟用密碼保護。到 Streamlit 的 Settings → Secrets 加一行："
+            'password = "你想設的密碼"，存檔後就會自動啟用登入。'
+        )
+        return True
+    if st.session_state.get("auth_ok"):
+        return True
+    st.markdown("### 🔒 NailVesta 達人組交接手冊")
+    st.caption("請輸入密碼以檢視內容。")
+    pw = st.text_input("密碼", type="password", label_visibility="collapsed")
+    if pw:
+        if hmac.compare_digest(pw, str(st.secrets["password"])):
+            st.session_state["auth_ok"] = True
+            st.rerun()
+        else:
+            st.error("密碼錯誤，請再試一次。")
+    return False
+
 
 # =============================================================
 # 頁面設定
@@ -133,6 +165,12 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# =============================================================
+# 密碼門（在 Streamlit Secrets 設 password 後啟用）
+# =============================================================
+if not check_password():
+    st.stop()
 
 # =============================================================
 # 側欄導覽
