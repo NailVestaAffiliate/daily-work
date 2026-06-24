@@ -215,9 +215,11 @@ Top-performing content (based on TikTok official conversion data):
 ▪️"Worth it?" / honest opinions (44%)
 ▪️Before & after results (41%)
 
-Content like this performs better and has a higher chance to be selected for paid ad boosting on our side ✨
+Content like this has the highest chance of being selected for paid advertising on our side ✨
 
-Let's make magic together 💖""", ""),
+Strong-performing videos can continue generating orders and affiliate commissions long after posting, which is why we highly encourage face-to-camera review content 💖
+
+Let’s make magic together ✨""", ""),
     ("2.0", None, """Hey babe! 💕 Your NailVesta package is almost there! 📦
 
 Don't forget — there's a Discord QR code inside the package, feel free to join and connect with other creators 💖
